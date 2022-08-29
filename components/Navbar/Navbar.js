@@ -1,24 +1,64 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ethers } from "ethers";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Navbar() {
   const [address, setAddress] = useState(
     ""
   );
   const [balance, setBalance] = useState(0);
+  
 
-  useEffect(() => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    provider.on("networkChanged", (newNetwork, oldNetwork) => {
-        console.log(newNetwork);
-    })
-  });
+  // useEffect(() => {
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum,"any");
+  //   provider.on("networkChanged", (newNetwork, oldNetwork) => {
+  //       console.log(newNetwork);
+  //   })
+  // });
+
+  const networks = {
+    ropsten: {
+      chainId: `0x3`,
+      chainName: "Ropsten Network",
+      nativeCurrency: {
+        name: "ETHER Token",
+        symbol: "ETH",
+        decimals: 18,
+      },
+      rpcUrls: ["https://ropsten.infura.io/v3/"],
+      blockExplorerUrls: ["https://ropsten.etherscan.io/"],
+    },
+  };
 
   const connectWallet = async () => {
     await window.ethereum.request({ method: "eth_requestAccounts" });
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer =await  provider.getSigner();
+    const signer =await provider.getSigner();
+    console.log(signer);
+    const chainId = await provider.getNetwork();
+    if (chainId.name !== 'ropsten'){
+      try{
+        await ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0x3'}],
+        });
+        // window.ethereum.request({
+        //   method: "wallet_addEthereumChain",
+        //   params: [
+        //     {
+        //       ...networks["ropsten"],
+        //     },
+        //   ],
+        // })
+      }
+      catch(error){
+        console.log(error);
+        toast(error.message);
+      }
+      
+    }
     const address = await signer.getAddress();
     const balance = ethers.utils.formatEther(await signer.getBalance());
     setAddress(address);
