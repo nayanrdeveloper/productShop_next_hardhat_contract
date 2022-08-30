@@ -26,7 +26,7 @@ function home({AllData}) {
 
 export default home;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_PROVIDER);
     const contract = new ethers.Contract(
         process.env.CONTRACT_ADDRESS,
