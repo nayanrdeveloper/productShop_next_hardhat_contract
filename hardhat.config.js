@@ -8,8 +8,8 @@ module.exports = {
   networks: {
     hardhat: {},
     ropsten: {
-      url: process.env.RPC_PROVIDER,
-      accounts: [process.env.PRIVATE_KEY],
+      url: process.env.NEXT_PUBLIC_RPC_PROVIDER,
+      accounts: [process.env.NEXT_PUBLIC_PRIVATE_KEY],
     },
   },
   paths: {

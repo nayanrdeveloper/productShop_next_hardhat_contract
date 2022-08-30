@@ -57,9 +57,9 @@ function CreateProduct() {
             toast(error.message);
           }
         }
-        // const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_PROVIDER);
+        // const provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_PROVIDER);
         const Contract = new ethers.Contract(
-          process.env.CONTRACT_ADDRESS,
+          process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
           eccomerceAbi.abi,
           signer
         );
