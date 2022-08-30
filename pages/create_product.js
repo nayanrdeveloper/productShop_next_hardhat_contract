@@ -19,6 +19,8 @@ function create_product() {
   const [isLoading, setIsLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [image, setImage] = useState(undefined);
+  const [imageLoading, setImageLoading] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
 
   const onchangeProductInput = (event) => {
     setProductData({
@@ -74,9 +76,10 @@ function create_product() {
         );
         await contractData.wait();
         console.log(contractData);
-        setProductAddress(contractData.to);
+        setProductAddress(contractData.hash);
         setIsLoading(false);
         notify();
+        setUploaded(true);
         setProductData({
           title: "",
           desc: "",
@@ -94,6 +97,7 @@ function create_product() {
   };
 
   const uploadToIpfsProcess = async () => {
+    setImageLoading(true);
     const web3StorageClient = new Web3Storage({
       token: process.env.NEXT_PUBLIC_WEB3_STORAGE_API_KEY,
     });
@@ -105,11 +109,8 @@ function create_product() {
     });
     const imageURI = `https://${cid}.ipfs.dweb.link/${fileName}`;
     setImageUrl(imageURI);
+    setImageLoading(false);
     toast("Image Uploaded Successfully in IPFS!");
-
-    // console.log(imageURI);
-    // console.log(web3StorageClient);
-    // console.log(image);
   };
 
   return (
@@ -163,9 +164,20 @@ function create_product() {
               </p>
             </div>
           ) : (
-            <div className="flex gap-2 justify-between">
-              <label className="text-slate-400">Product Address:</label>
-              <div className="text-slate-400"> {productAddress}</div>
+            <div className="flex gap-2">
+              {uploaded && (
+                <a
+                  target="_blank"
+                  className="text-slate-400"
+                  href={`https://ropsten.etherscan.io/tx/${productAddress}`}
+                  rel="noopener noreferrer"
+                >
+                  <button className="border border-transparent py-2 px-3 rounded-full text-gray-500 hover:cursor-pointer hover:border-emerald-400 bg-slate-800 hover:text-white hover:border hover:shadow-emerald-600 hover:shadow-md">
+                    Recent Product Address
+                  </button>
+                </a>
+              )}
+
               <ToastContainer />
             </div>
           )}
@@ -176,6 +188,12 @@ function create_product() {
           onClick={uploadToIpfsProcess}
           className="border border-transparent py-2 px-3 rounded-full text-gray-500 hover:cursor-pointer hover:border-emerald-400 bg-slate-800 hover:text-white hover:border hover:shadow-emerald-600 hover:shadow-md"
         >
+          {imageLoading && (
+            <span className="mr-1">
+              {" "}
+              <ClipLoader color={"green"} size={15} />{" "}
+            </span>
+          )}
           Upload to IPFS
         </button>
         <button
