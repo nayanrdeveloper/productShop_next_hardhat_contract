@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import "react-toastify/dist/ReactToastify.css";
 
-function create_product() {
+function CreateProduct() {
   const notify = () => toast("Product Uploaded in Block Successfully");
   const [productData, setProductData] = useState({
     title: "",
@@ -54,11 +54,9 @@ function create_product() {
               params: [{ chainId: "0x3" }],
             });
           } catch (error) {
-            console.log(error);
             toast(error.message);
           }
         }
-        console.log(process.env.CONTRACT_ADDRESS);
         // const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_PROVIDER);
         const Contract = new ethers.Contract(
           process.env.CONTRACT_ADDRESS,
@@ -66,7 +64,6 @@ function create_product() {
           signer
         );
         // Contract.registered("hello",)
-        console.log(Contract);
 
         const contractData = await Contract.registerProduct(
           productData.title,
@@ -75,7 +72,6 @@ function create_product() {
           imageUrl
         );
         await contractData.wait();
-        console.log(contractData);
         setProductAddress(contractData.hash);
         setIsLoading(false);
         notify();
@@ -93,7 +89,6 @@ function create_product() {
 
   const imageHandler = (event) => {
     setImage(event.target.files[0]);
-    console.log(image);
   };
 
   const uploadToIpfsProcess = async () => {
@@ -198,7 +193,7 @@ function create_product() {
         </button>
         <button
           onClick={submitHandler}
-          className="border border-transparent py-2 px-3 rounded-full text-gray-500 hover:cursor-pointer hover:border-emerald-400 bg-slate-800 hover:text-white hover:border hover:shadow-emerald-600 hover:shadow-md"
+          className="border border-transparent py-2 px-3 rounded-full text-gray-500 hover:cursor-pointer hover:border-green-600 bg-slate-800 hover:text-white hover:border hover:shadow-green-700 hover:shadow-md"
         >
           Submit
         </button>
@@ -207,4 +202,4 @@ function create_product() {
   );
 }
 
-export default create_product;
+export default CreateProduct;

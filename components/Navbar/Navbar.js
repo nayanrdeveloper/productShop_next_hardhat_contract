@@ -14,7 +14,6 @@ function Navbar() {
   // useEffect(() => {
   //   const provider = new ethers.providers.Web3Provider(window.ethereum,"any");
   //   provider.on("networkChanged", (newNetwork, oldNetwork) => {
-  //       console.log(newNetwork);
   //   })
   // });
 
@@ -36,7 +35,6 @@ function Navbar() {
     await window.ethereum.request({ method: "eth_requestAccounts" });
     const provider = new ethers.providers.Web3Provider(window.ethereum,"any");
     const signer =await provider.getSigner();
-    console.log(signer);
     const chainId = await provider.getNetwork();
     if (chainId.name !== 'ropsten'){
       try{
@@ -54,7 +52,6 @@ function Navbar() {
         // })
       }
       catch(error){
-        console.log(error);
         toast(error.message);
       }
       
@@ -83,16 +80,16 @@ function Navbar() {
                   Create Product
                 </li>
               </Link>
-              <Link href="/all_product">
+              {/* <Link href="/all_product">
                 <li className="border border-transparent py-2 px-3 rounded-full text-gray-500 hover:cursor-pointer hover:border-yellow-700 hover:text-white hover:border hover:shadow-yellow-800 hover:shadow-lg">
                   All Products{" "}
                 </li>
-              </Link>
+              </Link> */}
             </ul>
           </div>
         </div>
         <div className="my-auto flex gap-2">
-            {address && <span className="font-semibold py-1 px-3 my-auto bg-slate-800 text-gray-500 rounded-md hover:cursor-pointer hover:border-yellow-400 bg-slate-800 hover:text-white hover:border hover:shadow-yellow-300 hover:shadow-md">{`${address.substring(0,4)}...${address.substring(38,42)}  ${Number(balance).toFixed(2)}ETH`}</span> }
+            {address && <span className="font-semibold py-1 px-3 my-auto text-gray-500 rounded-md hover:cursor-pointer hover:border-yellow-400 bg-slate-800 hover:text-white hover:border hover:shadow-yellow-300 hover:shadow-md">{`${address.substring(0,4)}...${address.substring(38,42)}  ${Number(balance).toFixed(2)}ETH`}</span> }
           <button
             onClick={connectWallet}
             className="border border-transparent py-2 px-3 rounded-full text-gray-500 hover:cursor-pointer hover:border-emerald-400 bg-slate-800 hover:text-white hover:border hover:shadow-emerald-600 hover:shadow-lg"

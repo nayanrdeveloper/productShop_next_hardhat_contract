@@ -6,7 +6,6 @@ import eccomerceAbi from '../artifacts/contracts/ecommerce.sol/ecommerce.json';
 import ClipLoader from "react-spinners/ClipLoader";
 
 function all_product({AllData}) {
-    console.log(AllData);
   return (
     <div className='py-5 px-10 mt-5'>
         <div className='grid grid-cols-4 gap-4'>
@@ -34,7 +33,6 @@ export async function getStaticProps() {
       );
       const getAllCampaigns = contract.filters.registered();
       const allCampaigns = await contract.queryFilter(getAllCampaigns);
-      console.log(allCampaigns);
       const AllData = allCampaigns.map((e) => {
         return {
             title: e.args.title,
