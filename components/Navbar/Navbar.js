@@ -34,7 +34,7 @@ function Navbar() {
 
   const connectWallet = async () => {
     await window.ethereum.request({ method: "eth_requestAccounts" });
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const provider = new ethers.providers.Web3Provider(window.ethereum,"any");
     const signer =await provider.getSigner();
     console.log(signer);
     const chainId = await provider.getNetwork();
@@ -66,25 +66,25 @@ function Navbar() {
   };
   return (
     <div>
-      <div className="flex justify-between bg-gray-300 p-2 rounded-sm text-shadow-md border-b">
+      <div className="flex justify-between p-2 rounded-sm text-shadow-md border-b border-yellow-500 shadow shadow-yellow-500">
         <div>
           <div className="flex gap-5 justify-center">
-            <h1 className="my-auto text-green-600 font-bold text-2xl">
+            <h1 className="my-auto font-bold text-2xl text-slate-600">
               Product Shop
             </h1>
             <ul className="flex gap-3">
               <Link href="/">
-                <li className="py-1 px-2 rounded-md hover:bg-red-300 hover:cursor-pointer">
+                <li className="border border-transparent py-2 px-3 rounded-full text-gray-500 hover:cursor-pointer hover:border-yellow-700 hover:text-white hover:border hover:shadow-yellow-800 hover:shadow-lg">
                   Home
                 </li>
               </Link>
               <Link href="/create_product">
-                <li className="py-1 px-2 rounded-md hover:bg-red-300 hover:cursor-pointer">
+                <li className="border border-transparent py-2 px-3 rounded-full text-gray-500 hover:cursor-pointer hover:border-yellow-700 hover:text-white hover:border hover:shadow-yellow-800 hover:shadow-lg">
                   Create Product
                 </li>
               </Link>
               <Link href="/all_product">
-                <li className="py-1 px-2 rounded-md hover:bg-red-300 hover:cursor-pointer">
+                <li className="border border-transparent py-2 px-3 rounded-full text-gray-500 hover:cursor-pointer hover:border-yellow-700 hover:text-white hover:border hover:shadow-yellow-800 hover:shadow-lg">
                   All Products{" "}
                 </li>
               </Link>
@@ -92,10 +92,10 @@ function Navbar() {
           </div>
         </div>
         <div className="my-auto flex gap-2">
-            {address && <span className="font-semibold py-1 px-3 bg-slate-400 rounded-md">{`${address.substring(0,4)}...${address.substring(38,42)}  ${balance}`}</span> }
+            {address && <span className="font-semibold py-1 px-3 my-auto bg-slate-800 text-gray-500 rounded-md hover:cursor-pointer hover:border-yellow-400 bg-slate-800 hover:text-white hover:border hover:shadow-yellow-300 hover:shadow-md">{`${address.substring(0,4)}...${address.substring(38,42)}  ${Number(balance).toFixed(2)}ETH`}</span> }
           <button
             onClick={connectWallet}
-            className="bg-yellow-500 rounded-md py-1 px-3 hover:bg-yellow-600 cursor-pointer hover:text-white"
+            className="border border-transparent py-2 px-3 rounded-full text-gray-500 hover:cursor-pointer hover:border-emerald-400 bg-slate-800 hover:text-white hover:border hover:shadow-emerald-600 hover:shadow-lg"
           >
             Connect Wallet
           </button>

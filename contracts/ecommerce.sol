@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: Unlicensed
+// SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.7.0 <0.9.0;
 
@@ -11,17 +11,18 @@ contract ecommerce{
         address buyer;
         address payable seller;
         uint  productId;
+        string imageUrl;
         bool delivered;
     }
 
     product[] public allProducts;
     uint public count = 1;
 
-    event registered(string title, address seller, uint productId);
+    event registered(string title, address indexed seller, uint indexed productId, uint price, string desc, string imageUrl);
     event bought(uint productId, address buyer);
     event delivered(uint productId);
 
-    function registerProduct(string memory _title, string memory _desc, uint _price) public {
+    function registerProduct(string memory _title, string memory _desc, uint _price, string memory _imageUrl) public {
         require(_price > 0, "Product price greater than 0");
         product memory tempProduct;
         tempProduct.title = _title;
@@ -29,9 +30,10 @@ contract ecommerce{
         tempProduct.price = _price * 10**18;
         tempProduct.seller = payable(msg.sender);
         tempProduct.productId = count;
+        tempProduct.imageUrl = _imageUrl;
         allProducts.push(tempProduct);
         count++;
-        emit registered(_title, msg.sender, tempProduct.productId);
+        emit registered(_title, msg.sender, tempProduct.productId, tempProduct.price, tempProduct.desc, tempProduct.imageUrl);
 
     }
 

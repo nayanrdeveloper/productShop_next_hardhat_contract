@@ -8,31 +8,18 @@ import ClipLoader from "react-spinners/ClipLoader";
 function all_product({AllData}) {
     console.log(AllData);
   return (
-    <div className='py-3 px-7'>
-        <div className='grid grid-cols-4 space-x-4'>
+    <div className='py-5 px-10 mt-5'>
+        <div className='grid grid-cols-4 gap-4'>
             {
                 AllData ? AllData.map((element) => {
-                    return <div key={element.title} className='border border-dark-200 radius-md flex-col gap-2'>
-                    <Image src={profilePic}   height={2000} />
-                    <h3 className='text-teal-500'>{element.title}</h3>
-                    <p className=''>seller: <span className='truncate'>{`${element.seller.substring(0,4)}...${element.seller.substring(38,42)}`}</span></p>
-                    <p>{element.seller.length}</p>
+                    return <div key={element.title} className='border border-yellow-700 rounded-md hover:shadow-yellow-700 hover:shadow-md flex-col gap-2 hover:zoom-card p-2'>
+                    <img src={element.imageUrl} width={2000}  height={1100} className="h-72 w-full" />
+                    <h3 className='text-slate-400'>{element.title}</h3>
+                    <p className='text-slate-400'>Seller: <span className='truncate'>{`${element.seller.substring(0,4)}...${element.seller.substring(38,42)}`}</span></p>
+                    {/* <p className='text-slate-400'>Price: {element.price}</p> */}
                 </div>
                 }) : <ClipLoader color={color} loading={loading} cssOverride={override} size={150} />
             }
-            
-            <div className='border border-dark-200 radius-md'>
-                <Image src={profilePic}  height={2000} />
-                <p>Hello</p>
-            </div>
-            <div className='border border-dark-200 radius-md'>
-                <Image src={profilePic}  height={2000} />
-                <p>Hello</p>
-            </div>
-            <div className='border border-dark-200 radius-md'>
-                <Image src={profilePic}  height={2000} />
-                <p>Hello</p>
-            </div>
         </div>
     </div>
   )
@@ -52,6 +39,10 @@ export async function getStaticProps() {
         return {
             title: e.args.title,
             seller: e.args.seller,
+            // productId: e.args.productId,
+            // price: e.args.price,
+            desc: e.args.desc,
+            imageUrl: e.args.imageUrl, 
           }
       })
     // const signer = provider.getSigner();
