@@ -1,34 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div id="top"></div>
 
-## Getting Started
+<!-- ABOUT THE PROJECT -->
+# Product Shop (simple add product in blockchain and fetch data using blockchain)
 
-First, run the development server:
+A Product shop app are simple project of blockchain.Seller create product and store in blockchain and fetch product data using simple Smart Contract.
+<p>Home Page</p>
+![HomePage!](scrrenshot/HomePage.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Built With
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+* [Solidity](https://docs.soliditylang.org/)
+* [Hardhat](https://hardhat.org/getting-started/)
+* [Next.js](https://nextjs.org/)
+* [ethers.js](https://docs.ethers.io/v5/)
+* [TailwindCss](https://tailwindcss.com/)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### User interface
+   
+The front end is built with Next JS it's framework of React.Add few ui libraries like react-toastify, react-spinners for build great User Interface.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The front-end is built using the following libraries:
+      <ul>
+        <li><b>Ethers.js:</b> used as interface between the UI and the deployed smart contract</li>
+        <li><b>Tailwind CSS:</b> Styles using TailwindCss</li>    
+      </ul>
+      
+The main component is Mint.js which handles the nft minting and the coundown periods : 
 
-## Learn More
+![Home Page](scrrenshot/HomePage.png)
 
-To learn more about Next.js, take a look at the following resources:
+Create Product:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![Connect wallet](scrrenshot/Create_NFT.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Product Store waiting (Mining in Blockchain):
 
-## Deploy on Vercel
+![Create NFT](scrrenshot/Waiting_product.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Uploaded Product show in Home page:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![All NFT](scrrenshot/Uplodaed_product.png)
+
+Created Product in EtherScan (Uploaded Product)
+
+![Blogs](scrrenshot/etherscan_created_product.png)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+### Prerequisites
+
+* [nodejs](https://nodejs.org/en/download/) and [yarn](https://classic.yarnpkg.com/en/)
+* [MetaMask](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn) Chrome extension installed in your browser
+* [Hardhat](https://hardhat.org/) for local smart contracts deployement and testing
+* [web3.storage](https://web3.storage/) account for web3 storage (free account).

@@ -33,7 +33,7 @@ function Navbar() {
 
   const connectWallet = async () => {
     await window.ethereum.request({ method: "eth_requestAccounts" });
-    const provider = new ethers.providers.Web3Provider(window.ethereum,"any");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer =await provider.getSigner();
     const chainId = await provider.getNetwork();
     if (chainId.name !== 'ropsten'){
